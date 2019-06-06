@@ -1,0 +1,46 @@
+<odoo>
+  <!-- <template id="home_template"> 
+  <div > Xin chao nhe </div>
+  </template> -->
+ 
+   <template id="home_template">
+        <t t-call="web.layout">
+            <t t-set="head_web">
+                <script type="text/javascript">
+                    odoo.session_info = <t t-raw="session_info"/>;
+                </script>
+
+                <t t-call-assets="web.assets_common" t-js="false"/>
+                <t t-call-assets="web.assets_backend" t-js="false"/>
+                <t t-call-assets="web.assets_common" t-css="false"/>
+                <t t-call-assets="web.assets_backend" t-css="false"/>
+
+                <![CDATA[
+                    <!--[if lt IE 10]>
+                        <body class="ie9">
+                    <![endif]-->
+                ]]>
+
+                <script type="text/javascript">
+                    odoo.define('web.web_client', function (require) {
+                        var WebClient = require('web.WebClient');
+                        var web_client = new WebClient();
+                        $(function() {
+                            web_client.setElement($(document.body));
+                            web_client.start();
+                        });
+                        return web_client;
+                    });
+                </script>
+            </t>
+            <t t-set="head" t-value="head_web + (head or '')"/>
+            <div>
+            <!-- Thong bao moi -->
+            </div>
+            <t t-set="body_classname" t-value="'o_web_client'"/>
+            <div class="o_main">
+                <main class="o_main_content"/>
+            </div>
+          </t>
+    </template>
+</odoo>
